@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+*@
+@model List<JobModel>
+@{
+    ViewData["Title"] = "Deine Job-Inserate";
+}
+<a class="btn btn-primary" asp-controller="Job" asp-action="CreateEditJob">Neues Inserat anlegen</a>
+
+<table id="jobPostingTable" class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Job-Titel</th>
+            <th>Arbeitsort</th>
+            <th>Unternehmen</th>
+            <th>Startdatum</th>
+            <th>Gehalt</th>
+            <th>Aktionen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var job in Model)
+            {
+                <tr>
+                    <td>@job.Id</td>
+                    <td>@job.JobTitle</td>
+                    <td>@job.JobLocation</td>
+                    <td>@job.CompanyName</td>
+                    <td>@job.StartDate</td>
+                    <td>@job.Salary</td>
+                    <td>
+                        <a class="btn btn-warning" asp-route-id="@job.Id" asp-controller="Job" asp-action="CreateEditJob">Bearbeiten</a>
+                        <button onclick="onClickedDeleteButton(@job.Id)" class="btn btn-danger">Löschen</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#jobPostingTable').DataTable();
+        });
+
+        function onClickedDeleteButton(id) {
+            console.log("Button clicked");
+            Swal.fire({
+                title: 'Eintrag löschen',
+                text: "Bist du dir sicher, dass der Eintrag gelöscht werden soll?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ja, Eintrag löschen!',
+                cancelButtonText: 'Abbruch'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    // Backend call to delete job posting by id
+
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("DeleteJobPosting")",
+                        data: {
+                            id: id
+                        },
+                        success: function (msg) {
+                            Swal.fire(
+                                'Gelöscht!',
+                                'Der Eintrag wurde gelöscht.',
+                                'success'
+                            )
+                        },
+                        error: function (msg) {
+                            Swal.fire(
+                                'Fehler!',
+                                'Ups, etwas ist schief gelaufen.',
+                                'error'
+                            )
+                        }
+                    });
+
+                    
+                }
+            })
+        };
+    </script>
+}

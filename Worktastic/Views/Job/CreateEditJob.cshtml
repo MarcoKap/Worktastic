@@ -1,0 +1,103 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Worktastic.Models.JobModel
+@{
+    ViewData["Title"] = "Job-Inserat erstellen oder bearbeiten";
+}
+
+<form asp-controller="Job" asp-action="CreateEditJobEntry" enctype="multipart/form-data">
+    <input hidden asp-for="Id" />
+    <div class="card">
+        <div class="card-header">
+            <h5>Inserat bearbeiten</h5>
+        </div>
+        <div class="card-body">
+            <div class="row form-group">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="JobTitle" asp-for="JobTitle" placeholder="Vertrieb" />
+                        <label for="JobTitle">Job-Bezeichnung</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" asp-for="JobLocation" type="text" placeholder="Karlsruhe" />
+                        <label for="JobLocation">Arbeitsort</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group mb-4">
+                <div class="col">
+                    <textarea rows="6" class="form-control" asp-for="Description" type="text" placeholder="Bitte trage eine Beschreibung ein"></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input id="StartDate" class="form-control" asp-for="StartDate" type="date" placeholder="Startdatum" />
+                        <label for="StartDate">Startdatum</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="Salary" asp-for="Salary" type="number" placeholder="Gehalt" />
+                        <label for="Salary">Gehalt (€)</label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="p-4">Unternehmen & Ansprechpartner</h5>
+            <div class="row form-group">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="CompanyName" asp-for="CompanyName" type="text" placeholder="Unternehmensnamen" />
+                        <label for="CompanyName">Unternehmen</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label for="pictureUpload" class="form-label">Profilbild</label>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3">
+                        <input class="form-control" name="file" type="file" id="pictureUpload">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ContactName" asp-for="ContactName" type="text" placeholder="Name" />
+                        <label for="ContactName">Name</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ContactWebsite" asp-for="ContactWebsite" type="url" placeholder="Webseite" />
+                        <label for="ContactWebsite">Webseite</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row form-group">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ContactPhone" asp-for="ContactPhone" type="tel" placeholder="+49 12345 67890" />
+                        <label for="ContactPhone">Telefon</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="ContactMail" asp-for="ContactMail" type="email" placeholder="beispiel@test.de" />
+                        <label for="ContactMail">E-Mail</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" type="submit">Speichern</button>
+        </div>
+    </div>
+
+</form>
