@@ -14,9 +14,7 @@
             <th>Id</th>
             <th>Job-Titel</th>
             <th>Arbeitsort</th>
-            <th>Unternehmen</th>
             <th>Startdatum</th>
-            <th>Gehalt</th>
             <th>Aktionen</th>
         </tr>
     </thead>
@@ -28,9 +26,7 @@
                     <td>@job.Id</td>
                     <td>@job.JobTitle</td>
                     <td>@job.JobLocation</td>
-                    <td>@job.CompanyName</td>
                     <td>@job.StartDate</td>
-                    <td>@job.Salary</td>
                     <td>
                         <a class="btn btn-warning" asp-route-id="@job.Id" asp-controller="Job" asp-action="CreateEditJob">Bearbeiten</a>
                         <button onclick="onClickedDeleteButton(@job.Id)" class="btn btn-danger">Löschen</button>
